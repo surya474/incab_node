@@ -1,9 +1,9 @@
 var express = require('express')
 var router =express.Router()
-var loginModal=require('../modal/loginModal')
+var loginModal=require('../../modal/UserModals/loginModal')
 
 //save user
-
+     
 saveUser=(reqData,callback)=>{
     console.log("in save user")
 var login=new loginModal(reqData)

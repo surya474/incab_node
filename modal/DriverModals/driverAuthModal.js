@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+    
 
 const driverData=mongoose.Schema({
     Firstname: {
@@ -9,48 +9,50 @@ const driverData=mongoose.Schema({
     },
     Lastname: {
         type: String,
-        required: true,
+        required: false,
         index: true
     },
-    Phonenumber: {
-        type: String,
+    Mobile_Number: {
+        type: Number,
         required: true,
         index: true
     },
     AdharNumber: {
         type: String,
         required: true,
-        index: true
+        index: false
     },
     LicenseNumber: {
         type: String,
         required: true,
-        index: true
+        index: false
     },
     Cbook: {
         type: String,
-        required: true,
-        index: true
+        required: false,
+        index: false
     },
     Adharpic: {
         type: String,
         required: true,
-        index: true
+        index: false
     },
     Licensepic: {
         type: String,
         required: true,
-        index: true
+        index: false
     },
     Cbookpic: {
         type: String,
         required: true,
-        index: true
+        index: false
     },
     Address: {
         type: String,
         required: true,
-        index: true
+        index: false
     }
 
 })
+
+module.exports=mongoose.model('driverData', driverData);

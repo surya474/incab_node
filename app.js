@@ -15,7 +15,7 @@ mongoose.connect('mongodb://surya474:Surya4747@ds041678.mlab.com:41678/incab',{u
   if(err){
    console.log(err);
   }else {
-     console.log('connected to the Test db');
+     console.log('connected to the  db',db);
   }
 });   
 
@@ -44,9 +44,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/incab', require('./routes/home.router'));
-app.use('/incab/auth',require('./routes/authentication.router'))
-app.use('/incab/auth/driver',require('./routes/driver.auth.router'))
+app.use('/incab', require('./routes/UsersRoutes/home.router'));
+app.use('/incab/user/auth',require('./routes/UsersRoutes/home.router'))   
+app.use('/incab/driver/auth/',require('./routes/DriversRoutes/driver.auth.router'))
+app.use('/incab/driver/notifications/',require('./routes/DriversRoutes/driver.notification.route'))
+    
+    
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   // Website you wish to allow to connect
