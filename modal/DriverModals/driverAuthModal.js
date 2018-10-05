@@ -51,6 +51,10 @@ const driverData=mongoose.Schema({
         type: String,
         required: true,
         index: false
+    },
+    CreatedDate: {
+        type: Date,
+        default: Date.now()
     }
 
 })

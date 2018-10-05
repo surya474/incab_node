@@ -11,8 +11,12 @@ const driverToken=mongoose.Schema({
     Mobile_Number:{
         type: String,
         required: true,
-        index: false
-    }
+        index: true
+    },
+    upatedDate: {   
+        type: Date,
+        default: Date.now()
+    },
 
 })
 

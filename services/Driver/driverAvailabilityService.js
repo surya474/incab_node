@@ -1,40 +1,37 @@
 var express = require('express')
-var driverTokenModal=require('../../modal/DriverModals/driverNotificationModal')
+var driverAvailabilityModal=require('../../modal/DriverModals/driverAvailabilityModal')
 
-async function UpdateDriverToken(reqData,callback){
+async function UpdateDriverAvailability(reqData,callback){
     console.log(reqData)
     var query = {'Mobile_Number':reqData.Mobile_Number};
-     var driverTokenModal2= new driverTokenModal(reqData)
+     var driverAvailabilityModal2= new driverAvailabilityModal(reqData)
    var data = await checkDoc(reqData,query)
     if(data==null){
-    driverTokenModal2.save().then(doc=>{
+        driverAvailabilityModal2.save().then(doc=>{
           callback({success:true,   
               data:doc})
     }).catch(err=>{    
         callback({success:false,
             error:err})   
     })    
-    }
-   
+    }  
     else{
         callback({success:true,
             data:data})
     }
 
-
 }
 
 checkDoc=(reqData,query)=>{    
 new Promise(resolve=>{
-    driverTokenModal.findOneAndUpdate(query, reqData, {upsert:true}, function(err, doc){
+    driverAvailabilityModal.findOneAndUpdate(query, reqData, {upsert:true}, function(err, doc){
         if (err) resolve(err) 
-       else{
+       else{   
            resolve(doc)      
        }
     });   
 })
-}
+}    
 module.exports=({
-
-    UpdateDriverToken:UpdateDriverToken
+    UpdateDriverAvailability:UpdateDriverAvailability
 })

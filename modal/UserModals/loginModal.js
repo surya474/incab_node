@@ -16,7 +16,11 @@ const loginData=mongoose.Schema({
         required: true,
         index: true,
         unique:true
-    }
+    },  
+    CreatedDate: {
+        type: Date,
+        default: Date.now()
+    },
 
 
 })
