@@ -15,7 +15,7 @@ mongoose.connect('mongodb://surya474:Surya4747@ds041678.mlab.com:41678/incab',{u
   if(err){
    console.log(err);
   }else {
-     console.log('connected to the  db',db);
+     console.log('connected to the  db');
   }
 });   
 

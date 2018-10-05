@@ -29,14 +29,14 @@ checkDriver=(reqData,callback)=>{
 registerDriver=(reqData,callback)=>{
          
     var driverAuthModal2=new driverAuthModal(reqData)
-    driverAuthModal2.save().then(doc=>{
-        console.log("in save ",doc)
-      callback(doc)
-    }).catch(err=>{
-        console.log("in error",err)
-        callback(err)
-    })    
-
+    var query = {'Mobile_Number':reqData.Mobile_Number};
+    driverAuthModal.findOneAndUpdate(query, reqData, {new:true,upsert:true,returnNewDocument:true}, function(err, doc){
+        if (err) callback({success:false,error:err}) 
+        else{   
+            console.log("in updated doc",doc)
+            callback({success:true,data:doc})      
+        }   
+    });   
 }   
 
 

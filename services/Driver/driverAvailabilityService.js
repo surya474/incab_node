@@ -5,33 +5,22 @@ async function UpdateDriverAvailability(reqData,callback){
     console.log(reqData)
     var query = {'Mobile_Number':reqData.Mobile_Number};
      var driverAvailabilityModal2= new driverAvailabilityModal(reqData)
-   var data = await checkDoc(reqData,query)
-    if(data==null){
-        driverAvailabilityModal2.save().then(doc=>{
-          callback({success:true,   
-              data:doc})
-    }).catch(err=>{    
-        callback({success:false,
-            error:err})   
-    })    
-    }  
-    else{
-        callback({success:true,
-            data:data})
-    }
-
-}
+ let result=await checkDoc(reqData,query)
+ console.log("in promise return")
+      callback(result)   
+}   
 
 checkDoc=(reqData,query)=>{    
-new Promise(resolve=>{
-    driverAvailabilityModal.findOneAndUpdate(query, reqData, {upsert:true}, function(err, doc){
-        if (err) resolve(err) 
+return new Promise(resolve=>{        
+    driverAvailabilityModal.findOneAndUpdate(query, reqData, {new:true, upsert:true,returnNewDocument:true}, function(err, doc){
+        if (err) resolve({success:false,error:err}) 
        else{   
-           resolve(doc)      
+           console.log("in updated doc",doc)
+           resolve({success:true,data:doc})      
        }
     });   
-})
-}    
+})  
+}       
 module.exports=({
     UpdateDriverAvailability:UpdateDriverAvailability
 })

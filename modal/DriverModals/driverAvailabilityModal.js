@@ -8,8 +8,8 @@ const driverAvailabilty=mongoose.Schema({
         required: true,
         index: false  
     },
-    Mobile_Number:{
-        type: String,
+    Mobile_Number:{  
+        type: Number,
         required: true,
         index: true
     }

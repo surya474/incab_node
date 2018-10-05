@@ -5,33 +5,20 @@ async function UpdateDriverToken(reqData,callback){
     console.log(reqData)
     var query = {'Mobile_Number':reqData.Mobile_Number};
      var driverTokenModal2= new driverTokenModal(reqData)
-   var data = await checkDoc(reqData,query)
-    if(data==null){
-    driverTokenModal2.save().then(doc=>{
-          callback({success:true,   
-              data:doc})
-    }).catch(err=>{    
-        callback({success:false,
-            error:err})   
-    })    
-    }
-   
-    else{
-        callback({success:true,
-            data:data})
-    }
-
-
+     let result=await checkDoc(reqData,query)
+     console.log("in promise return")
+          callback(result)
 }
 
 checkDoc=(reqData,query)=>{    
-new Promise(resolve=>{
-    driverTokenModal.findOneAndUpdate(query, reqData, {upsert:true}, function(err, doc){
-        if (err) resolve(err) 
-       else{
-           resolve(doc)      
-       }
-    });   
+return new Promise(resolve=>{
+    driverTokenModal.findOneAndUpdate(query, reqData, {new:true,upsert:true,returnNewDocument:true}, function(err, doc){
+        if (err) resolve({success:false,error:err}) 
+        else{   
+            console.log("in updated doc",doc)
+            resolve({success:true,data:doc})      
+        }
+    });     
 })
 }
 module.exports=({

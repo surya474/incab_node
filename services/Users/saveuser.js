@@ -2,26 +2,13 @@ var express = require('express')
 var router =express.Router()
 var loginModal=require('../../modal/UserModals/loginModal')
 
-//save user
-     
-saveUser=(reqData,callback)=>{
+//save user     
+async function saveUser(reqData,callback){
     console.log("in save user")
 var login=new loginModal(reqData)
 var query = {'Mobile_Number':reqData.Mobile_Number};
 var data = await checkDoc(reqData,query)
-if(data==null){
-    login.save().then(doc=>{
-     callback({success:true,   
-         data:doc})
-}).catch(err=>{    
-   callback({success:false,
-       error:err})   
-})    
-}  
-else{
-   callback({success:true,
-       data:data})
-}
+callback(data)
 
 }
 
@@ -42,14 +29,15 @@ checkandInsertUser=(reqData,callback)=>{
       callback(err)    
     })
 }
-
+   
 checkDoc=(reqData,query)=>{    
     new Promise(resolve=>{
-        loginModal.findOneAndUpdate(query, reqData, {upsert:true}, function(err, doc){
-            if (err) resolve(err) 
-           else{   
-               resolve(doc)      
-           }
+        loginModal.findOneAndUpdate(query, reqData, {new:true, upsert:true,returnNewDocument:true}, function(err, doc){
+            if (err) resolve({success:false,error:err}) 
+            else{   
+                console.log("in updated doc",doc)
+                resolve({success:true,data:doc})      
+            }
         });   
     })
     }    
