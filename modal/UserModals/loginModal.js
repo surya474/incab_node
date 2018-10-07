@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 
-const loginData=mongoose.Schema({
-    first_name: {
+const Users=mongoose.Schema({
+    First_Name: {
         type: String,
         required: true,
         index: true
     },
-    last_name:{
+    Last_Name:{
         type: String,
         required: false,
         index: false
     },
-    mobile_number:{
-        type: Number,
+    Mobile_Number:{
+        type: String,
         required: true,
         index: true,
         unique:true
@@ -25,4 +25,4 @@ const loginData=mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('loginData', loginData); 
+module.exports = mongoose.model('Users', Users); 

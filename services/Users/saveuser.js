@@ -3,46 +3,44 @@ var router =express.Router()
 var loginModal=require('../../modal/UserModals/loginModal')
 
 //save user     
-async function saveUser(reqData,callback){
-    console.log("in save user")
-var login=new loginModal(reqData)
-var query = {'Mobile_Number':reqData.Mobile_Number};
-var data = await checkDoc(reqData,query)
-callback(data)
-
+registerUser=(reqData,callback)=>{       
+    var query = {'Mobile_Number':reqData.Mobile_Number};
+    loginModal.findOneAndUpdate(query, reqData, {new:true,upsert:true,returnNewDocument:true}, function(err, doc){
+        if (err) callback({success:false,error:err}) 
+        else{   
+            console.log("in updated doc",doc)
+            callback({success:true,data:doc})      
+        }   
+    });   
 }
 
-checkandInsertUser=(reqData,callback)=>{
 
-    loginModal.findOne({mobile_number:reqData}).then(doc=>{
+
+checkUSer=(reqData,callback)=>{
+
+    loginModal.findOne({Mobile_Number:reqData.Mobile_Number}).then(doc=>{
         console.log(doc)
-        if(doc==null || doc.length==0){
+        if(doc==null){  
             callback({
                 docExists:false
             })
         }   
-        else{
-            callback(doc)
-        }   
+        else{               
+            callback({docExists:true,
+                Data:doc}
+            )
+        }
+
     }).catch(err=>{
         console.log(err)
       callback(err)    
     })
 }
-   
-checkDoc=(reqData,query)=>{    
-    new Promise(resolve=>{
-        loginModal.findOneAndUpdate(query, reqData, {new:true, upsert:true,returnNewDocument:true}, function(err, doc){
-            if (err) resolve({success:false,error:err}) 
-            else{   
-                console.log("in updated doc",doc)
-                resolve({success:true,data:doc})      
-            }
-        });   
-    })
-    }    
+
+
+
   
 module.exports=({
-    saveUser:saveUser,
-    checkandInsertUser:checkandInsertUser
+    registerUser:registerUser,
+    checkUSer:checkUSer  
 })

@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/incab', require('./routes/UsersRoutes/home.router'));
-app.use('/incab/user/auth',require('./routes/UsersRoutes/home.router'))   
+app.use('/incab/user/auth',require('./routes/UsersRoutes/user.auth.router'))   
 app.use('/incab/driver/auth/',require('./routes/DriversRoutes/driver.auth.router'))
 app.use('/incab/driver/notifications/',require('./routes/DriversRoutes/driver.notification.route'))
 app.use('/incab/driver/avilability',require('./routes/DriversRoutes/driver.availability.route'))    

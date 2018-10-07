@@ -1,14 +1,11 @@
 var express = require('express')
 var driverAuthModal=require('../../modal/DriverModals/driverAuthModal')
 
-
-
-
 checkDriver=(reqData,callback)=>{
 
-    driverAuthModal.find({Mobile_Number:reqData.Mobile_Number}).then(doc=>{
+    driverAuthModal.findOne({Mobile_Number:reqData.Mobile_Number}).then(doc=>{
         console.log(doc)
-        if(doc==null || doc.length==0){
+        if(doc==null){
             callback({
                 docExists:false
             })
@@ -37,6 +34,7 @@ registerDriver=(reqData,callback)=>{
             callback({success:true,data:doc})      
         }   
     });   
+
 }   
 
 

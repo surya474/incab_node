@@ -1,9 +1,9 @@
 const Joi = require('joi');
 
 var loginschema=Joi.object({
-"first_name":Joi.string().required(),
-"last_name":Joi.string(),
-"mobile_number":Joi.number().required()
+"First_Name":Joi.string().required(),
+"Last_Name":Joi.string(),
+"Mobile_Number":Joi.number().required()
 })
 
 
