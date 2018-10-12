@@ -4,6 +4,7 @@ var app = express()
 const ExpressJoi = require('express-joi-validator');
 var JoiValidationSchema = require('../../schemas/joiValidationschema')
 var userLoginService = require('../../services/Users/saveuser')
+var nearCabService=require('../../services/Users/getNearCabsService')
 
 
 router.post('/RegisterUser', function (req, res) {
@@ -21,12 +22,15 @@ router.post('/RegisterUser', function (req, res) {
 
 }
 )
-
+  
 router.post('/checkUser',function(req,res){
-    var mobile_number=req.body.mobile_number
-      userLoginService.checkUSer(mobile_number,function(response){
+    var Mobile_Number=req.body.Mobile_Number
+      userLoginService.checkUSer({Mobile_Number:Mobile_Number},function(response){
     res.json(response)      
       })
-  })    
+  })      
+  
+ 
+    
 
 module.exports = router;

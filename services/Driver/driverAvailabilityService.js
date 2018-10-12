@@ -20,7 +20,19 @@ return new Promise(resolve=>{
        }
     });   
 })  
-}       
+}   
+
+async function UpdateDriverLocation(reqData,callback){
+
+    var query={'Mobile_Number':reqData.Mobile_Number}
+    console.log(reqData)
+    var driverAvailabilityModal2= new driverAvailabilityModal(reqData)
+    let result=await checkDoc(reqData,query)
+    console.log("in promise return")
+         callback(result)
+}
+        
 module.exports=({
-    UpdateDriverAvailability:UpdateDriverAvailability
+    UpdateDriverAvailability:UpdateDriverAvailability,
+    UpdateDriverLocation:UpdateDriverLocation
 })

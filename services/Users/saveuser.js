@@ -22,15 +22,18 @@ checkUSer=(reqData,callback)=>{
         console.log(doc)
         if(doc==null){  
             callback({
+                success:true,
                 docExists:false
             })
         }   
         else{               
-            callback({docExists:true,
+            callback({
+                success:true,
+                docExists:true,
                 Data:doc}
             )
         }
-
+   
     }).catch(err=>{
         console.log(err)
       callback(err)    
