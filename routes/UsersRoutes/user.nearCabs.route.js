@@ -13,7 +13,7 @@ var params={
     "lat":req.body.lat,
     "lng":req.body.lng,
       
-}  
+}     
       
 nearCabService.getNearCabs(params,function(result){
     res.json(result)

@@ -12,7 +12,7 @@ async function getNearCabs(reqData, callback) {
 
     calcDistance(reqData, res).then(result => {
 
-      console.log("final resp", result)
+     // console.log("final resp", result)
       callback(result)
     })
   }, err => {
@@ -34,7 +34,7 @@ async function calcDistance(reqData, res) {
     if (res[i].distanceValue < minDistance) {
       finalData.push(res[i])
     }
-    console.log("final data", res)
+  //  console.log("final data", res)
   }    
   //console.log(res)    
   return ({success:true,Data:finalData})
