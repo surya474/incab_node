@@ -40,11 +40,11 @@ async function sendMessagetoCabs(reqData,cabsData,tripID){
     io.on('connection', function(socket){
       
         socket.on('driverResp',(data)=>{
-            
+            console.log("driver resp",data)
         })
         });
 
-let sendData=await emitData(reqData,cabsData[0],tripID)
+let sendData=await emitData(reqData,cabsData[i],tripID)
 
   }
   
@@ -53,10 +53,10 @@ let sendData=await emitData(reqData,cabsData[0],tripID)
 
 async function emitData(reqData,cabData,tripId){
   io.on('connection', function(socket){
-let obj=reqData
+let obj=reqData   
     obj["driverId"]=cabData._id
     obj["tripId"]=tripId
-    socket.emit('reqCab', obj);
+    io.emit('reqCab', obj);
   });
 }
 
