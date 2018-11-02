@@ -33,6 +33,11 @@ sendMessagetoCabs(reqData,cabsData,tripID)
 }
 
 
+async function settimeout(){  
+  setTimeout(function(){ return true }, 20000);
+
+}
+
 async function sendMessagetoCabs(reqData,cabsData,tripID){
 
 
