@@ -53,7 +53,7 @@ let sendData=await emitData(reqData,cabsData[i],tripID)
 
 async function emitData(reqData,cabData,tripId){
   io.on('connection', function(socket){
-let obj=reqData   
+let obj=reqData      
     obj["driverId"]=cabData._id
     obj["tripId"]=tripId
     io.emit('reqCab', obj);
