@@ -50,7 +50,9 @@ app.use('/incab', require('./routes/UsersRoutes/home.router'));
 app.use('/incab/user/auth', require('./routes/UsersRoutes/user.auth.router'))
 app.use('/incab/user/getDrivers', require('./routes/UsersRoutes/user.nearCabs.route'))   
 app.use('/incab/user/bookride',require('./routes/UsersRoutes/user.bookride.route'))
-   
+app.use('/incab/user/reqRideDetails',require('./routes/UsersRoutes/user.ridePriceDetails'))   
+
+  
 //Driver routes
 app.use('/incab/driver/auth/',require('./routes/DriversRoutes/driver.auth.router'))
 app.use('/incab/driver/notifications/',require('./routes/DriversRoutes/driver.notification.route'))

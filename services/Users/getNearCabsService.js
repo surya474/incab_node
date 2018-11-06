@@ -67,8 +67,8 @@ async function googleDist(reqData, res) {
 }
 module.exports = ({
   getNearCabs: getNearCabs,
-
-})
+  calcDistance:calcDistance
+})   
 
 
 
