@@ -12,8 +12,8 @@ const driverData=mongoose.Schema({
         required: false,
         index: true
     },
-    Mobile_Number: {
-        type: Number,
+    Mobile_Number: {  
+        type: String,  
         required: true,
         index: true
     },

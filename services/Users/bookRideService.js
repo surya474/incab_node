@@ -31,8 +31,9 @@ async function confirmRide(reqData) {
     'from': reqData.from,
     'to':reqData.to,
     'date':new Date(),
-    'uid':reqData.uid,
-    'status':0,      
+    'userId':reqData.uid,
+    'status':0, 
+    'tripId':tripID       
 }
 
   client.hmset(reqData.Mobile_Number,obj);
@@ -89,7 +90,8 @@ async function emitData(reqData, cabData, tripId) {
 function responsefromCab(data){
   if(data.reqStatus==1){
     client.hgetall(data.Mobile_Number,function(err, object) {
-      console.log(object);
+      console.log("response from cab",data);
+      console.log("redis data",object)    
       if(object.status==0){
         client.hmset(data.Mobile_Number,{   
           status:1,
@@ -97,8 +99,11 @@ function responsefromCab(data){
         })    
         data['driverId']=data.driverId
         data['status']=1
+         io.on('connection', function (socket) {
+
+  });
         io.emit('respfromserver',data)
-        io.emit('triprequestousr',data)      
+        io.emit('tripReqStatus',data)      
       }
   
       else{
