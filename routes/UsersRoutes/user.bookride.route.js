@@ -7,8 +7,8 @@ router.post('/confirmRide',function(req,res){
    var obj={
        "lat":req.body.lat,
        "lng":req.body.lng  
-   }
-bookRideService.confirmRide(obj).then(result=>{
+   }  
+bookRideService.confirmRide(req.body).then(result=>{
     console.log("in result")   
     res.json(result)
 })

@@ -8,9 +8,13 @@ const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var app  = express();
+// var server = app.listen(8810)
+// var io = require('socket.io').listen(server);
 
-
-//Mongo Db Connection
+//      var iosocket= require('./services/Users/bookRideService')
+//      iosocket.start(io)  
+//Mongo Db Connection  
 mongoose.connect('mongodb://surya474:Surya4747@ds041678.mlab.com:41678/incab',{useNewUrlParser:true},function(err,db){
   if(err){
    console.log(err);
@@ -24,13 +28,10 @@ var db = mongoose.connection;
 
 module.exports = db;
 
-
+  
 //routers importing
 var HTTP_CODES = require('./shared/httpCode.util');
 var LOGGER = require('./shared/logger.util');
-
-
-var app = express();
 
 
 // view engine setup
@@ -76,7 +77,7 @@ app.use(function(req, res, next) {
   // Pass to next layer of middleware
   next();
 });
-
+   
 
 // error handler
 app.use(function(err, req, res, next) {
